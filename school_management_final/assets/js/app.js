@@ -301,7 +301,7 @@ function initializeAuthUser(){
   );
 
   if(!session){
-    window.location.replace("login.html");
+    window.location.replace("school_management_final/assets/html/login.html");
     return;
   }
 
@@ -319,7 +319,7 @@ function initializeAuthUser(){
       if(!confirm("Do you want to logout?")) return;
       localStorage.removeItem("edunova_session");
       sessionStorage.removeItem("edunova_session");
-     window.location.replace("html/login.html");
+    window.location.replace("school_management_final/assets/html/login.html");
     });
   }
 }
