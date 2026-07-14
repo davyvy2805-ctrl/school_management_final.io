@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EduNova School Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="school_management_final/assets/css/style.css">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-mark"><i class="bi bi-mortarboard-fill"></i></div>
+      <div>
+        <h1>EduNova</h1>
+        <span>School Manager</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <button class="nav-link active" data-page="dashboard">
+        <i class="bi bi-grid-1x2-fill"></i><span>Dashboard</span>
+      </button>
+      <button class="nav-link" data-page="students">
+        <i class="bi bi-people-fill"></i><span>Students</span>
+      </button>
+      <button class="nav-link" data-page="teachers">
+        <i class="bi bi-person-badge-fill"></i><span>Teachers</span>
+      </button>
+      <button class="nav-link" data-page="classes">
+        <i class="bi bi-journal-bookmark-fill"></i><span>Classes</span>
+      </button>
+      <button class="nav-link" data-page="attendance">
+        <i class="bi bi-calendar2-check-fill"></i><span>Attendance</span>
+      </button>
+      <button class="nav-link" data-page="grades">
+        <i class="bi bi-bar-chart-fill"></i><span>Grades</span>
+      </button>
+      <button class="nav-link" data-page="settings">
+        <i class="bi bi-gear-fill"></i><span>Settings</span>
+      </button>
+      <button class="nav-link logout-link" id="logoutBtn">
+        <i class="bi bi-box-arrow-left"></i><span>Logout</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-help">
+      <i class="bi bi-lightbulb-fill"></i>
+      <strong>Need help?</strong>
+      <small>Read the README file to understand the project.</small>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <header class="topbar">
+      <div class="d-flex align-items-center gap-3">
+        <button class="icon-btn d-lg-none" id="menuBtn"><i class="bi bi-list"></i></button>
+        <div>
+          <h2 id="pageTitle">Dashboard</h2>
+          <p id="pageSubtitle">Welcome back. Here is today’s school overview.</p>
+        </div>
+      </div>
+
+      <div class="topbar-actions">
+        <div class="search-box d-none d-md-flex">
+          <i class="bi bi-search"></i>
+          <input id="globalSearch" type="search" placeholder="Search students...">
+        </div>
+        <button class="icon-btn position-relative">
+          <i class="bi bi-bell"></i>
+          <span class="notification-dot"></span>
+        </button>
+        <div class="profile-chip">
+          <div class="avatar">AD</div>
+          <div class="d-none d-sm-block">
+            <strong>Admin Dara</strong>
+            <small>Administrator</small>
+          </div>
+          <i class="bi bi-chevron-down"></i>
+        </div>
+      </div>
+    </header>
+
+    <section class="content-area">
+      <!-- Dashboard -->
+      <div class="page-section active" id="dashboardPage">
+        <div class="hero-panel">
+          <div>
+            <span class="eyebrow">ACADEMIC YEAR 2026–2027</span>
+            <h3>Build a better learning experience.</h3>
+            <p>Manage students, teachers, classes and academic performance from one clean dashboard.</p>
+            <button class="btn btn-light rounded-pill px-4" data-page-jump="students">
+              Manage students <i class="bi bi-arrow-right ms-2"></i>
+            </button>
+          </div>
+          <div class="hero-illustration">
+            <i class="bi bi-book-half"></i>
+          </div>
+        </div>
+
+        <div class="row g-4 mt-1">
+          <div class="col-sm-6 col-xl-3">
+            <div class="stat-card">
+              <div class="stat-icon purple"><i class="bi bi-people-fill"></i></div>
+              <div><span>Total Students</span><h4 id="studentCount">0</h4><small class="positive">+8% this term</small></div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-xl-3">
+            <div class="stat-card">
+              <div class="stat-icon blue"><i class="bi bi-person-video3"></i></div>
+              <div><span>Teachers</span><h4 id="teacherCount">0</h4><small>Across all departments</small></div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-xl-3">
+            <div class="stat-card">
+              <div class="stat-icon orange"><i class="bi bi-door-open-fill"></i></div>
+              <div><span>Active Classes</span><h4 id="classCount">0</h4><small>Morning and afternoon</small></div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-xl-3">
+            <div class="stat-card">
+              <div class="stat-icon green"><i class="bi bi-check2-circle"></i></div>
+              <div><span>Attendance</span><h4 id="attendanceRate">0%</h4><small class="positive">Today’s rate</small></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-4 mt-1">
+          <div class="col-xl-8">
+            <div class="panel-card">
+              <div class="panel-heading">
+                <div><h4>Recent Students</h4><p>Latest student records added to the system.</p></div>
+                <button class="text-button" data-page-jump="students">View all <i class="bi bi-arrow-right"></i></button>
+              </div>
+              <div class="table-responsive">
+                <table class="table custom-table align-middle">
+                  <thead><tr><th>Student</th><th>Class</th><th>Gender</th><th>Status</th></tr></thead>
+                  <tbody id="recentStudentsBody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-4">
+            <div class="panel-card h-100">
+              <div class="panel-heading">
+                <div><h4>Today’s Schedule</h4><p>Upcoming classes and activities.</p></div>
+              </div>
+              <div class="schedule-list">
+                <div class="schedule-item">
+                  <div class="time-pill">08:00</div>
+                  <div><strong>Morning Assembly</strong><small>Main Courtyard</small></div>
+                </div>
+                <div class="schedule-item">
+                  <div class="time-pill">09:30</div>
+                  <div><strong>Mathematics – Grade 10</strong><small>Room A-204</small></div>
+                </div>
+                <div class="schedule-item">
+                  <div class="time-pill">13:30</div>
+                  <div><strong>Science Club</strong><small>Laboratory 2</small></div>
+                </div>
+                <div class="schedule-item">
+                  <div class="time-pill">15:00</div>
+                  <div><strong>Staff Meeting</strong><small>Conference Room</small></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Students -->
+      <div class="page-section" id="studentsPage">
+        <div class="section-toolbar">
+          <div><h3>Students Directory</h3><p>Create, edit, search and remove student records.</p></div>
+          <button class="btn btn-primary action-btn" data-bs-toggle="modal" data-bs-target="#studentModal" id="addStudentBtn">
+            <i class="bi bi-plus-lg"></i> Add Student
+          </button>
+        </div>
+
+        <div class="panel-card">
+          <div class="filter-row">
+            <div class="search-box inner-search">
+              <i class="bi bi-search"></i>
+              <input id="studentSearch" type="search" placeholder="Search by name, ID or class">
+            </div>
+            <select id="classFilter" class="form-select">
+              <option value="">All classes</option>
+            </select>
+            <select id="statusFilter" class="form-select">
+              <option value="">All status</option>
+              <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+            </select>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table custom-table align-middle">
+              <thead>
+                <tr><th>ID</th><th>Student</th><th>Class</th><th>Gender</th><th>Phone</th><th>Status</th><th class="text-end">Actions</th></tr>
+              </thead>
+              <tbody id="studentsTableBody"></tbody>
+            </table>
+          </div>
+          <div id="studentEmpty" class="empty-state d-none">
+            <i class="bi bi-people"></i><h4>No students found</h4><p>Try another search or add a new student.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Teachers -->
+      <div class="page-section" id="teachersPage">
+        <div class="section-toolbar">
+          <div><h3>Teaching Staff</h3><p>Overview of teachers and their departments.</p></div>
+          <button class="btn btn-primary action-btn" id="addTeacherBtn"><i class="bi bi-plus-lg"></i> Add Teacher</button>
+        </div>
+        <div class="row g-4" id="teacherGrid"></div>
+      </div>
+
+      <!-- Classes -->
+      <div class="page-section" id="classesPage">
+        <div class="section-toolbar">
+          <div><h3>Classes</h3><p>Classrooms, subjects and assigned teachers.</p></div>
+          <button class="btn btn-primary action-btn" id="addClassBtn"><i class="bi bi-plus-lg"></i> Add Class</button>
+        </div>
+        <div class="row g-4" id="classGrid"></div>
+      </div>
+
+      <!-- Attendance -->
+      <div class="page-section" id="attendancePage">
+        <div class="section-toolbar">
+          <div><h3>Daily Attendance</h3><p>Mark today’s attendance for every student.</p></div>
+          <button class="btn btn-primary action-btn" id="saveAttendanceBtn"><i class="bi bi-check2"></i> Save Attendance</button>
+        </div>
+        <div class="panel-card">
+          <div class="filter-row">
+            <select id="attendanceClassFilter" class="form-select"><option value="">All classes</option></select>
+            <input class="form-control" type="date" id="attendanceDate">
+          </div>
+          <div class="table-responsive">
+            <table class="table custom-table align-middle">
+              <thead><tr><th>Student</th><th>Class</th><th class="text-center">Present</th><th class="text-center">Absent</th><th class="text-center">Late</th></tr></thead>
+              <tbody id="attendanceBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grades -->
+      <div class="page-section" id="gradesPage">
+        <div class="section-toolbar">
+          <div><h3>Grade Book</h3><p>Review academic performance by subject.</p></div>
+          <button class="btn btn-primary action-btn" id="exportGradesBtn"><i class="bi bi-download"></i> Export CSV</button>
+        </div>
+        <div class="panel-card">
+          <div class="table-responsive">
+            <table class="table custom-table align-middle">
+              <thead><tr><th>Student</th><th>Mathematics</th><th>English</th><th>Science</th><th>Average</th><th>Grade</th></tr></thead>
+              <tbody id="gradesBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Settings -->
+      <div class="page-section" id="settingsPage">
+        <div class="section-toolbar"><div><h3>School Settings</h3><p>Update basic information displayed in the system.</p></div></div>
+        <div class="panel-card settings-card">
+          <form id="settingsForm">
+            <div class="row g-4">
+              <div class="col-md-6"><label class="form-label">School name</label><input class="form-control" id="schoolName" value="EduNova International School"></div>
+              <div class="col-md-6"><label class="form-label">Academic year</label><input class="form-control" id="academicYear" value="2026–2027"></div>
+              <div class="col-md-6"><label class="form-label">Email</label><input class="form-control" type="email" id="schoolEmail" value="info@edunova.edu"></div>
+              <div class="col-md-6"><label class="form-label">Phone</label><input class="form-control" id="schoolPhone" value="+855 23 555 0101"></div>
+              <div class="col-12"><label class="form-label">Address</label><textarea class="form-control" id="schoolAddress" rows="3">Phnom Penh, Cambodia</textarea></div>
+            </div>
+            <button class="btn btn-primary action-btn mt-4" type="submit"><i class="bi bi-floppy"></i> Save Settings</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- Student Modal -->
+<div class="modal fade" id="studentModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content custom-modal">
+      <div class="modal-header">
+        <div><h5 class="modal-title" id="studentModalTitle">Add New Student</h5><p>Enter the student information below.</p></div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <form id="studentForm">
+        <div class="modal-body">
+          <input type="hidden" id="editStudentId">
+          <div class="row g-3">
+            <div class="col-md-6"><label class="form-label">Full name</label><input class="form-control" id="studentName" required placeholder="e.g. Sok Dara"></div>
+            <div class="col-md-6"><label class="form-label">Student ID</label><input class="form-control" id="studentCode" required placeholder="e.g. ST-1008"></div>
+            <div class="col-md-6"><label class="form-label">Class</label><select class="form-select" id="studentClass" required></select></div>
+            <div class="col-md-6"><label class="form-label">Gender</label><select class="form-select" id="studentGender" required><option value="">Select gender</option><option>Male</option><option>Female</option><option>Other</option></select></div>
+            <div class="col-md-6"><label class="form-label">Phone</label><input class="form-control" id="studentPhone" placeholder="012 345 678"></div>
+            <div class="col-md-6"><label class="form-label">Status</label><select class="form-select" id="studentStatus"><option>Active</option><option>Inactive</option></select></div>
+            <div class="col-12"><label class="form-label">Email</label><input class="form-control" type="email" id="studentEmail" placeholder="student@example.com"></div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary action-btn"><i class="bi bi-check2"></i> Save Student</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="appToast" class="toast align-items-center border-0" role="alert">
+    <div class="d-flex"><div class="toast-body" id="toastMessage">Saved successfully.</div><button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast"></button></div>
+  </div>
+</div>
+
+
+<script>
+  (function () {
+    const session = JSON.parse(
+      localStorage.getItem("edunova_session") ||
+      sessionStorage.getItem("edunova_session") ||
+      "null"
+    );
+    if (!session) {
+      window.location.replace("login.html");
+    }
+  })();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="school_management_final/assets/js/app.js"></script>
+</body>
+</html>
