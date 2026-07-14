@@ -60,7 +60,7 @@ function handleLogin(event){
     localStorage.removeItem(SESSION_KEY);
   }
 
- window.location.replace("../../index.html");
+window.location.replace("../../../index.html");
 }
 
 function handleRegister(event){
